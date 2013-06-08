@@ -22,13 +22,15 @@ public class WebServiceTemplate {
     Map<String, Object> getInfo() {
         Map<String, Object> rval = new HashMap<String, Object>();
 
-        rval.put("AppName", "Spring Base MVC App");
+        rval.put("Application Name", "Spring MVC Template");
 
         Map<String, String> appInfo = new HashMap<String, String>();
 
         appInfo.put("Framework", "Spring MVC");
         appInfo.put("Dependency Management", "Maven");
         appInfo.put("Developer", "Kevin Leong");
+
+        rval.put("Application Information", appInfo);
 
         return rval;
     }

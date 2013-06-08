@@ -5,6 +5,6 @@
 ## Git Branches
 A description of the branches in this repository:
 
-*   __basic__ - bare bones app containing a web service layer and MVC controller.
+*   __basic__ - bare bones app containing a web service layer and MVC controller.  The absolute smallest app possible.
 *   __regular__ - contains SLF4J, maven-surefire, and TestNG support
 *   __mybatis__ - adds mybatis support on top of the __regular__ branch.

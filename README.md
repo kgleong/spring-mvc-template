@@ -9,3 +9,6 @@ A description of the branches in this repository:
 *   __regular__ - contains SLF4J, maven-surefire, and TestNG support. (in progress)
 *   __mybatis__ - adds mybatis support on top of the __regular__ branch. (in progress)
 *   __security__ - adds Spring Security to the __mybatis__ branch. (in progress)
+
+## Instructions
+*

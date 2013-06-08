@@ -24,6 +24,12 @@ public class WebServiceTemplate {
 
         rval.put("AppName", "Spring Base MVC App");
 
+        Map<String, String> appInfo = new HashMap<String, String>();
+
+        appInfo.put("Framework", "Spring MVC");
+        appInfo.put("Dependency Management", "Maven");
+        appInfo.put("Developer", "Kevin Leong");
+
         return rval;
     }
 }

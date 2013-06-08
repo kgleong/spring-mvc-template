@@ -13,6 +13,6 @@ A description of the branches in this repository:
 ## Instructions
 1.  Prerequisites: Maven 3, Java 1.6
 2.  Clone this repo
-3.  <pre><code>mvn clean install</code></pre>
-4.  <pre><code>mvn jetty:run</code></pre>
+3.  Build: <pre><code>mvn clean install</code></pre>
+4.  Start Jetty webserver: <pre><code>mvn jetty:run</code></pre>
 5.  Jetty server will be listening on port 8080

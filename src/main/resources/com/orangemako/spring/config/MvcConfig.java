@@ -1,4 +1,4 @@
-package com.orangemako;
+package com.orangemako.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,13 +16,18 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.orangemako.spring.controller"})
+@ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
 public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
+    /**
+     * Provide a view resolver to map views to the correct template files.
+     *
+     * @return
+     */
     @Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

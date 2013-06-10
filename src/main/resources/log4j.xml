@@ -20,19 +20,14 @@
 
     <!-- Log4J Levels: TRACE, DEBUG, INFO, WARN, ERROR -->
 
-
     <!-- Specific logger settings -->
     <logger name="com.orangemako.spring.controller.mvc">
         <level value="trace" />
     </logger>
 
-    <logger name="com.orangemako.spring.controller.webservice">
-        <level value="warn" />
-    </logger>
-
     <!-- Settings for all other loggers -->
     <root>
-        <priority value="debug" />
+        <priority value="info" />
         <appender-ref ref="console" />
     </root>
 

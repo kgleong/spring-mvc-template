@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Configuration;
  * @author Kevin Leong
  */
 @Configuration // Identifies this class to Spring as a configuration file
-public class AppConfig {
+public class ApplicationContext {
 }

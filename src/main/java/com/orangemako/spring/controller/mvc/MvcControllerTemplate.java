@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping
-public class MvcTemplate {
+public class MvcControllerTemplate {
 
     @RequestMapping(value = "mvc", method = RequestMethod.GET)
     public String displayWelcomeMessage(ModelMap modelMap) {

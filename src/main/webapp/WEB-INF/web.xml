@@ -20,7 +20,7 @@
        specified for component-scanning -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.orangemako.spring.config.AppConfig</param-value>
+        <param-value>com.orangemako.spring.config.ApplicationContext</param-value>
     </context-param>
 
     <servlet>
@@ -40,7 +40,7 @@
              and fully-qualified @Configuration classes -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.orangemako.spring.config.MvcConfig</param-value>
+            <param-value>com.orangemako.spring.config.MvcContext</param-value>
         </init-param>
     </servlet>
 

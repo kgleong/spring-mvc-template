@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping
-public class WebServiceTemplate {
+public class WebServiceControllerTemplate {
 
     @RequestMapping(value = "webService", method = RequestMethod.GET)
     public @ResponseBody

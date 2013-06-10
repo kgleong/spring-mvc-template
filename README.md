@@ -7,7 +7,7 @@ A description of the branches in this repository:
 
 *   __basic__ - bare bones app containing a web service layer and MVC controller.  The absolute smallest app possible.
 *   __standard__ - contains Spring properties, Log4J, SLF4J, Maven-Surefire, and TestNG support. (in progress)
-*   __mybatis__ - adds mybatis support on top of the __regular__ branch. (in progress)
+*   __mybatis__ - adds mybatis support on top of the __standard__ branch. (in progress)
 *   __security__ - adds Spring Security to the __mybatis__ branch. (in progress)
 
 ## Instructions

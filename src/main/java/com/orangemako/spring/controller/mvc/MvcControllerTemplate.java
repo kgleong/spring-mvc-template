@@ -1,5 +1,8 @@
 package com.orangemako.spring.controller.mvc;
 
+import com.orangemako.spring.util.LoggerUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping
 public class MvcControllerTemplate {
+    private static final Logger LOG = LoggerFactory.getLogger(MvcControllerTemplate.class);
 
     @RequestMapping(value = "mvc", method = RequestMethod.GET)
     public String displayWelcomeMessage(ModelMap modelMap) {
@@ -29,6 +33,8 @@ public class MvcControllerTemplate {
                 .append(sum(numOne, numTwo));
 
         modelMap.addAttribute("calculation", calculationMessage.toString());
+
+        LoggerUtils.logMessagesAllLevels(LOG);
 
         return "welcome";
     }

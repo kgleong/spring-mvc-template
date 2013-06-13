@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SpringMvcTemplateTestSuite">
+    <test name="ControllerTests" verbose="1">
+        <packages>
+            <package name="com.orangemako.spring.controller.*" />
+        </packages>
+    </test>
+
+    <listeners>
+        <listener class-name="com.orangemako.spring.listener.ResultListener" />
+    </listeners>
+</suite>

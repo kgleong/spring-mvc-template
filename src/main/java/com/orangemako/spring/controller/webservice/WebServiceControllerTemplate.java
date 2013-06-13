@@ -40,4 +40,15 @@ public class WebServiceControllerTemplate {
 
         return rval;
     }
+
+    /**
+     * Finds the product of two numbers.
+     *
+     * @param numOne
+     * @param numTwo
+     * @return
+     */
+    public int multiply(int numOne, int numTwo) {
+        return numOne * numTwo;
+    }
 }

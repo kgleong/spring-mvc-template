@@ -24,6 +24,8 @@ import javax.annotation.Resource;
 @PropertySource("classpath:/default-config.properties")
 public class MvcContext extends WebMvcConfigurerAdapter {
 
+    // Spring automatically autowires this.  Through this variable, properties
+    // from the specified property source can be accessed.
     @Resource
     private Environment environment;
 
@@ -49,5 +51,4 @@ public class MvcContext extends WebMvcConfigurerAdapter {
     public String getAnimalType() {
         return environment.getProperty("animal.type", String.class);
     }
-
 }

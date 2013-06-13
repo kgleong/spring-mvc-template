@@ -3,10 +3,13 @@ package com.orangemako.spring.controller.mvc;
 import com.orangemako.spring.util.LoggerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.annotation.Resource;
 
 /**
  * Basic MVC Controller.
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping
 public class MvcControllerTemplate {
     private static final Logger LOG = LoggerFactory.getLogger(MvcControllerTemplate.class);
+
+    @Resource(name = "animalType")
+    String animalType;
 
     @RequestMapping(value = "mvc", method = RequestMethod.GET)
     public String displayWelcomeMessage(ModelMap modelMap) {
@@ -33,6 +39,8 @@ public class MvcControllerTemplate {
                 .append(sum(numOne, numTwo));
 
         modelMap.addAttribute("calculation", calculationMessage.toString());
+
+        modelMap.addAttribute("animalType", animalType);
 
         LoggerUtils.logMessagesAllLevels(LOG);
 

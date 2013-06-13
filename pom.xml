@@ -117,6 +117,12 @@
                     <stopKey>shutdown</stopKey>
                     <stopPort>9876</stopPort>
                     <jvmArgs>-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m</jvmArgs>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8081</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
 

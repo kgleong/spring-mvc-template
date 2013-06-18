@@ -6,7 +6,7 @@
 A description of the branches in this repository:
 
 *   __basic__ - bare bones app containing a web service layer and MVC controller.  The absolute smallest app possible.
-*   __standard__ - contains Spring properties, Log4J, SLF4J, Maven-Surefire, and TestNG support. (in progress)
+*   __standard__ - adds Spring property files, Log4J, SLF4J, and TestNG support using test suite XML configuration.
 *   __mybatis__ - adds mybatis support on top of the __standard__ branch. (in progress)
 *   __security__ - adds Spring Security to the __mybatis__ branch. (in progress)
 
@@ -19,4 +19,4 @@ A description of the branches in this repository:
 2.  Clone this repo
 3.  Build: <pre><code>mvn clean install</code></pre>
 4.  Start Jetty webserver: <pre><code>mvn jetty:run</code></pre>
-5.  Jetty server will be listening on port 8080
+5.  Jetty server will be listening on port 8081

@@ -51,4 +51,14 @@ public class MvcContext extends WebMvcConfigurerAdapter {
     public String getAnimalType() {
         return environment.getProperty("animal.type", String.class);
     }
+
+    @Bean(name = "resumeURI")
+    public String getResumeURI() {
+        return environment.getProperty("resume.uri", String.class);
+    }
+
+    @Bean(name = "resumeContentDivId")
+    public String getResumeContentDivId() {
+        return environment.getProperty("resume.content.div.id", String.class);
+    }
 }

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Resume/CV controller.
@@ -54,9 +57,14 @@ public class ResumeConverterController {
         // Remove the table of contents
         contents.remove(0);
 
+        Date date = new Date();
+        String dateString = String.format("%tB %<te, %<tY", date);
+
         // Wrap the content in a root tag (for SAX parser)
         StringBuilder resumeHtmlContent = new StringBuilder("<div>");
         resumeHtmlContent.append(resumeHeaderHtml);
+        resumeHtmlContent.append("<p>This document is current as of ").append(dateString).append(".</p>");
+
         for (Element e : contents) {
             resumeHtmlContent.append(e.outerHtml());
         }

@@ -22,7 +22,7 @@ import java.net.URL;
  */
 @Controller
 @RequestMapping
-public class ResumeConverter {
+public class ResumeConverterController {
 
     @Resource(name = "resumeURI")
     String resumeUri;
@@ -32,6 +32,9 @@ public class ResumeConverter {
 
     @Resource(name = "pdfFilename")
     String pdfFilename;
+
+    @Resource(name = "resumeHeaderHtml")
+    String resumeHeaderHtml;
 
     @RequestMapping(value = "resume", method = RequestMethod.GET)
     public void getResumeAsPdfDocument(HttpServletResponse response, OutputStream outputStream)
@@ -50,11 +53,10 @@ public class ResumeConverter {
 
         // Remove the table of contents
         contents.remove(0);
-        String sourceDisclaimer =
-                "<p>Document generated dynamically from <a href=\"http://www.orangemako.com/wiki/index.php/Curriculum_Vitae\">" +
-                "my online CV</a></p>";
+
+        // Wrap the content in a root tag (for SAX parser)
         StringBuilder resumeHtmlContent = new StringBuilder("<div>");
-        resumeHtmlContent.append(sourceDisclaimer);
+        resumeHtmlContent.append(resumeHeaderHtml);
         for (Element e : contents) {
             resumeHtmlContent.append(e.outerHtml());
         }

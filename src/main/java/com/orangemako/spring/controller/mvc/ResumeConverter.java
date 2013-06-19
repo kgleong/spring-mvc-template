@@ -30,13 +30,16 @@ public class ResumeConverter {
     @Resource(name = "resumeContentDivId")
     String resumeContentDivId;
 
+    @Resource(name = "pdfFilename")
+    String pdfFilename;
+
     @RequestMapping(value = "resume", method = RequestMethod.GET)
     public void getResumeAsPdfDocument(HttpServletResponse response, OutputStream outputStream)
             throws IOException, DocumentException {
 
         // Set response headers
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachement;filename=kevin_leong_resume.pdf");
+        response.setHeader("Content-Disposition", "attachement;filename=" + pdfFilename);
 
         // Retrieve Resume content and parse HTML
         org.jsoup.nodes.Document doc = Jsoup.parse((new URL(resumeUri)).openStream(), "UTF-8", resumeUri);
@@ -47,8 +50,11 @@ public class ResumeConverter {
 
         // Remove the table of contents
         contents.remove(0);
-
+        String sourceDisclaimer =
+                "<p>Document generated dynamically from <a href=\"http://www.orangemako.com/wiki/index.php/Curriculum_Vitae\">" +
+                "my online CV</a></p>";
         StringBuilder resumeHtmlContent = new StringBuilder("<div>");
+        resumeHtmlContent.append(sourceDisclaimer);
         for (Element e : contents) {
             resumeHtmlContent.append(e.outerHtml());
         }

@@ -61,4 +61,9 @@ public class MvcContext extends WebMvcConfigurerAdapter {
     public String getResumeContentDivId() {
         return environment.getProperty("resume.content.div.id", String.class);
     }
+
+    @Bean(name = "pdfFilename")
+    public String getPdfFilename() {
+        return environment.getProperty("pdf.filename", String.class);
+    }
 }

@@ -32,6 +32,14 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Jackson JSON Processor -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
-public class MvcContext extends WebMvcConfigurerAdapter {
+public class DispatcherConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

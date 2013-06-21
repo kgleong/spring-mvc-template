@@ -25,9 +25,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
-public class MvcContext extends WebMvcConfigurerAdapter {
-    private static final Logger LOG = LoggerFactory.getLogger(MvcContext.class);
-
+public class DispatcherConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

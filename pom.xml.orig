@@ -45,6 +45,8 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+<<<<<<< HEAD
+=======
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -52,6 +54,7 @@
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
+>>>>>>> basic
 
         <!-- Jackson JSON Processor -->
         <dependency>
@@ -104,7 +107,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${basedir}/src/main/resources</directory>
             </resource>
         </resources>
         <plugins>

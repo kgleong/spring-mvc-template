@@ -10,6 +10,10 @@ A description of the branches in this repository:
 *   __mybatis__ - adds mybatis support on top of the __standard__ branch. (in progress)
 *   __security__ - adds Spring Security to the __mybatis__ branch. (in progress)
 
+### Additional Add Ons
+*   __resume-pdf__ - retrieves my online CV and generates a resume in PDF format.
+
+
 ## Instructions
 1.  Prerequisites: Maven 3, Java 1.6
 2.  Clone this repo

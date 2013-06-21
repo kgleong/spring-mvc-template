@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,16 +28,19 @@ import java.util.Date;
 @RequestMapping
 public class ResumeConverterController {
 
-    @Resource(name = "resumeURI")
+    @Value("${resume.uri}")
     String resumeUri;
 
-    @Resource(name = "resumeContentDivId")
+    @Value("${resume.content.div.id}")
     String resumeContentDivId;
 
-    @Resource(name = "pdfFilename")
+    @Value("${resume.pdf.filename}")
     String pdfFilename;
 
-    @Resource(name = "resumeHeaderHtml")
+    @Value("${resume.font.size.percent}")
+    String resumeFontSizePercent;
+
+    @Value("${resume.header.html}")
     String resumeHeaderHtml;
 
     @RequestMapping(value = "resume", method = RequestMethod.GET)
@@ -61,9 +65,11 @@ public class ResumeConverterController {
         String dateString = String.format("%tB %<te, %<tY", date);
 
         // Wrap the content in a root tag (for SAX parser)
-        StringBuilder resumeHtmlContent = new StringBuilder("<div>");
-        resumeHtmlContent.append(resumeHeaderHtml);
-        resumeHtmlContent.append("<p>This document is current as of ").append(dateString).append(".</p>");
+        StringBuilder resumeHtmlContent = new StringBuilder();
+        resumeHtmlContent.append("<div style=\"font-size:")
+                         .append(getResumeFontSizePercent()).append("%\">")
+                         .append(resumeHeaderHtml)
+                         .append("<p>This document is current as of ").append(dateString).append(".</p>");
 
         for (Element e : contents) {
             resumeHtmlContent.append(e.outerHtml());
@@ -76,5 +82,19 @@ public class ResumeConverterController {
         renderer.layout();
         renderer.createPDF(outputStream);
         outputStream.close();
+    }
+
+    /**
+     * Checks the system properties to see if a font size percentage has been set.  If not, use the default font
+     * size setting.
+     *
+     * @return
+     */
+    String getResumeFontSizePercent() {
+        String rval = System.getProperty("resumeFontSizePercent");
+
+        rval = (rval != null) ? rval : resumeFontSizePercent;
+
+        return rval;
     }
 }

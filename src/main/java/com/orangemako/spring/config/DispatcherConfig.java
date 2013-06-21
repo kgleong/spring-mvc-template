@@ -26,6 +26,8 @@ import java.util.List;
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
 public class DispatcherConfig extends WebMvcConfigurerAdapter {
+    private static final Logger LOG = LoggerFactory.getLogger(DispatcherConfig.class);
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
@@ -60,9 +62,11 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
         resourceList.add(new ClassPathResource("default-config.properties"));
 
         // External optional property file that can override properties in the internal property file.
-        resourceList.add(new FileSystemResource(System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
+        resourceList.add(new FileSystemResource(
+                System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
 
-        org.springframework.core.io.Resource[] resources = resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
+        org.springframework.core.io.Resource[] resources =
+                resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
         rval.setLocations(resources);
 
         // Ignore errors if property files can't be found (for optional property files)

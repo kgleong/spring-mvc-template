@@ -9,7 +9,7 @@ public class Item {
 
     private int id;
     private String name;
-    private Category category;
+    private String category;
     private double price;
 
     public void setId(int id) {
@@ -20,11 +20,27 @@ public class Item {
         this.name = name;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

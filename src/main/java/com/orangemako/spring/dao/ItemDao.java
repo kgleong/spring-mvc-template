@@ -1,4 +1,4 @@
-package com.orangemako.spring.persistence.dao;
+package com.orangemako.spring.dao;
 
 import com.orangemako.spring.domain.Item;
 import org.apache.ibatis.annotations.Insert;
@@ -20,7 +20,10 @@ public interface ItemDao {
     public List<Item> getAllItems();
 
     @Select("SELECT * FROM items WHERE id = #{itemId}")
-    public Item getById(@Param("itemId") String itemId);
+    public Item getById(@Param("itemId") int itemId);
+
+    // Using XML to specify SQL statement instead of annotations.
+    public List<Item> getItemsLessThanPrice(double price);
 
     @Insert("INSERT INTO items (name, category, price) VALUES (#{name}, #{category}, #{price})")
     public int insertItem(Item item);

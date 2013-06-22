@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orangemako.spring.dao.ItemDao">
+    <resultMap type="com.orangemako.spring.domain.Item" id="Item">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="category" property="category" />
+        <result column="price" property="price" />
+    </resultMap>
+
+    <select id="getItemsLessThanPrice" parameterType="double" resultMap="Item">
+        SELECT * FROM items WHERE price &lt; #{price}
+    </select>
+</mapper>

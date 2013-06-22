@@ -35,8 +35,14 @@ public class DataWebServiceController {
 
     @RequestMapping(value = "item/id/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    Item getItemById(@PathVariable("id") String itemId) {
+    Item getItemById(@PathVariable("id") int itemId) {
         return itemService.getById(itemId);
+    }
+
+    @RequestMapping(value = "item/lessThanPrice/{price}", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Item> getItemsLessThanPrice(@PathVariable("price") double price) {
+        return itemService.getItemsLessThanPrice(price);
     }
 
     @RequestMapping(value = "item/insert", method = RequestMethod.POST)

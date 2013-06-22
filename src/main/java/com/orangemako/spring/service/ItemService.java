@@ -1,7 +1,7 @@
 package com.orangemako.spring.service;
 
 import com.orangemako.spring.domain.Item;
-import com.orangemako.spring.persistence.dao.ItemDao;
+import com.orangemako.spring.dao.ItemDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,11 +31,21 @@ public class ItemService {
 
     /**
      * Retrieves an item by it's ID
+     *
      * @param itemId
      * @return
      */
-    public Item getById(String itemId) {
+    public Item getById(int itemId) {
         return itemDao.getById(itemId);
+    }
+
+    /**
+     * Gets all items that are less than the specified price.
+     *
+     * @param price
+     */
+    public List<Item> getItemsLessThanPrice(double price) {
+        return itemDao.getItemsLessThanPrice(price);
     }
 
     /**

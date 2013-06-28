@@ -3,7 +3,11 @@ package com.orangemako.spring.controller.mvc;
 import com.orangemako.spring.util.LoggerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +34,15 @@ public class MvcControllerTemplate {
         int numTwo = 2;
 
         StringBuilder calculationMessage = new StringBuilder();
+
+        // Need to get the proxied object in order for any aspect-related calls to run.
+        int sum = ((MvcControllerTemplate)AopContext.currentProxy()).sum(numOne, numTwo);
+
         calculationMessage.append(numOne)
                 .append(" + ")
                 .append(numTwo)
                 .append(" = ")
-                .append(sum(numOne, numTwo));
+                .append(sum);
 
         modelMap.addAttribute("calculation", calculationMessage.toString());
 

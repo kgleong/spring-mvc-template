@@ -1,18 +1,28 @@
 # Spring MVC Template Application
 *   This application can be used as a starting point for any Spring MVC application.
-*   Uses Spring __Java Configuration__ in place of XML configuration.
+*   Uses Spring **Java Configuration** in place of XML configuration.
 
 ## Git Branches
 A description of the branches in this repository:
 
-*   __basic__ - bare bones app containing a web service layer and MVC controller.  The absolute smallest app possible.
-*   __standard__ - adds Spring property files, Log4J, SLF4J, and TestNG support using test suite XML configuration.
-*   __mybatis__ - adds mybatis support on top of the __standard__ branch. (in progress)
-*   __security__ - adds Spring Security to the __mybatis__ branch. (in progress)
+*   **basic** - bare bones app containing a web service layer and MVC controller.  The absolute smallest app possible.
+*   **standard**
+    - Spring property files,
+    - Spring AspectJ Aspect Oriented Programming (AOP)
+    - Log4J/SLF4J
+    - TestNG support using test suite XML configuration.
+    - Inherits features from the *basic* branch
+*   **mybatis**
+    - MyBatis ORM Framework
+    - HSQLDB embedded in-memory database
+    - Inherits features from the *standard* branch
+*   **mybatis-rds** (in progress)
+*   **security** (in progress)
 
 ### Additional Add Ons
-*   __resume-pdf__ - retrieves my online CV and generates a resume in PDF format.
-
+*   **resume-pdf** - retrieves my [online CV](http://www.orangemako.com/wiki/index.php/Curriculum_Vitae) and generates a resume in PDF format.
+    - Flying Saucer (CSS formatting)
+    - IText (PDF Generation)
 
 ## Instructions
 1.  Prerequisites: Maven 3, Java 1.6

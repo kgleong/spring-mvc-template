@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -22,9 +23,18 @@ import java.util.List;
  *
  * @author Kevin Leong
  */
+// Marks this class as containing beans to add to the applicable context.
 @Configuration
+
+// When added to an @Configuration annotated class, this imports WebMvcConfigurationSupport, which
+// maps requests to @RequestMapping annotated methods/classes as well as registering other mapping handlers.
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
+
+// Import beans or other configurations from an XML file.
+@ImportResource("classpath:dispatcher_config.xml")
+
+// Scans the following packages for classes with @Component annotations
+@ComponentScan(basePackages = {"com.orangemako.spring.controller", "com.orangemako.spring.aop"})
 public class DispatcherConfig extends WebMvcConfigurerAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(DispatcherConfig.class);
 

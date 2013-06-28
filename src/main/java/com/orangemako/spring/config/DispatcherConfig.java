@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -22,11 +23,20 @@ import java.util.List;
  *
  * @author Kevin Leong
  */
+// Marks this class as containing beans to add to the applicable context.
 @Configuration
+
+// When added to an @Configuration annotated class, this imports WebMvcConfigurationSupport, which
+// maps requests to @RequestMapping annotated methods/classes as well as registering other mapping handlers.
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.orangemako.spring.controller"}) // Scans the following packages for classes with @Controller annotations
-public class MvcContext extends WebMvcConfigurerAdapter {
-    private static final Logger LOG = LoggerFactory.getLogger(MvcContext.class);
+
+// Import beans or other configurations from an XML file.
+@ImportResource("classpath:dispatcher_config.xml")
+
+// Scans the following packages for classes with @Component annotations
+@ComponentScan(basePackages = {"com.orangemako.spring.controller", "com.orangemako.spring.aop"})
+public class DispatcherConfig extends WebMvcConfigurerAdapter {
+    private static final Logger LOG = LoggerFactory.getLogger(DispatcherConfig.class);
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -62,9 +72,11 @@ public class MvcContext extends WebMvcConfigurerAdapter {
         resourceList.add(new ClassPathResource("default-config.properties"));
 
         // External optional property file that can override properties in the internal property file.
-        resourceList.add(new FileSystemResource(System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
+        resourceList.add(new FileSystemResource(
+                System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
 
-        org.springframework.core.io.Resource[] resources = resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
+        org.springframework.core.io.Resource[] resources =
+                resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
         rval.setLocations(resources);
 
         // Ignore errors if property files can't be found (for optional property files)

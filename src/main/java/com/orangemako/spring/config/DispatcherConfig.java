@@ -7,16 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * MVC Servlet Context Configuration.
@@ -63,24 +58,6 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer rval = new PropertySourcesPlaceholderConfigurer();
-
-        // Add the property files to the resource list
-        List<org.springframework.core.io.Resource> resourceList = new ArrayList<org.springframework.core.io.Resource>();
-
-        // Internal property file
-        resourceList.add(new ClassPathResource("default-config.properties"));
-
-        // External optional property file that can override properties in the internal property file.
-        resourceList.add(new FileSystemResource(
-                System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
-
-        org.springframework.core.io.Resource[] resources =
-                resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
-        rval.setLocations(resources);
-
-        // Ignore errors if property files can't be found (for optional property files)
-        rval.setIgnoreResourceNotFound(true);
-        return rval;
+        return ConfigUtils.propertySourcesPlaceholderConfigurer();
     }
 }

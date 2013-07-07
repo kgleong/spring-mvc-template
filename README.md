@@ -16,7 +16,10 @@ A description of the branches in this repository:
     - MyBatis ORM Framework
     - HSQLDB embedded in-memory database
     - Inherits features from the *standard* branch
-*   **mybatis-rds** (in progress)
+*   **mybatis-remote-db**
+    - Connects to a remote MySQL host/database
+    - c3p0 pooled database connections
+    - Inherites features from the *mybatis* branch
 *   **security** (in progress)
 
 ### Additional Add Ons

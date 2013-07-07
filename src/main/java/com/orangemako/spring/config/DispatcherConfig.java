@@ -63,24 +63,6 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
      */
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer rval = new PropertySourcesPlaceholderConfigurer();
-
-        // Add the property files to the resource list
-        List<org.springframework.core.io.Resource> resourceList = new ArrayList<org.springframework.core.io.Resource>();
-
-        // Internal property file
-        resourceList.add(new ClassPathResource("default-config.properties"));
-
-        // External optional property file that can override properties in the internal property file.
-        resourceList.add(new FileSystemResource(
-                System.getProperty("user.home") + "/.spring/spring-mvc-template.properties"));
-
-        org.springframework.core.io.Resource[] resources =
-                resourceList.toArray(new org.springframework.core.io.Resource[resourceList.size()]);
-        rval.setLocations(resources);
-
-        // Ignore errors if property files can't be found (for optional property files)
-        rval.setIgnoreResourceNotFound(true);
-        return rval;
+        return ConfigUtils.propertySourcesPlaceholderConfigurer();
     }
 }

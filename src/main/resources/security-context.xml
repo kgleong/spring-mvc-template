@@ -10,9 +10,12 @@
     <!-- use-expressions: allows the use of permitAll, isAuthenticated, etc.
          auto-config: sets form-login, http-basic, and logout as the default values -->
     <security:http auto-config="true" use-expressions="true">
+        <!-- adds remember me functionality to login page -->
+        <security:remember-me />
+
         <!-- Restrict URLs -->
 
-        <!-- Allow favicon.ico universal access to prevent redirect errors -->
+        <!-- Allow universal access resources. E.g., css, favicon, javascript, etc. -->
         <security:intercept-url pattern="/favicon.ico" access="permitAll" />
 
         <!-- Default catch all for any unspecified patterns -->
@@ -22,7 +25,7 @@
     <security:authentication-manager>
         <security:authentication-provider >
             <security:user-service>
-                <security:user name="user1" password="password1" authorities="ROLE_USER" />
+                <security:user name="username1" password="password1" authorities="ROLE_USER" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>

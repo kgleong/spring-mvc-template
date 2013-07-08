@@ -3,6 +3,7 @@ package com.orangemako.spring.config;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -15,6 +16,8 @@ import javax.servlet.ServletRegistration;
  * @author Kevin Leong
  */
 public class WebAppInitializer implements WebApplicationInitializer {
+
+    private static final String SPRING_SECURITY_FILTER_CHAIN = "springSecurityFilterChain";
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -32,5 +35,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+
+        // Add Filters
+        servletContext.addFilter(SPRING_SECURITY_FILTER_CHAIN, new DelegatingFilterProxy(SPRING_SECURITY_FILTER_CHAIN))
+                      .addMappingForUrlPatterns(null, false, "/*");
+
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!-- use-expressions: allows the use of permitAll, isAuthenticated, etc.
+         auto-config: sets form-login, http-basic, and logout as the default values -->
+    <security:http auto-config="true" use-expressions="true">
+        <!-- Restrict URLs -->
+
+        <!-- Allow favicon.ico universal access to prevent redirect errors -->
+        <security:intercept-url pattern="/favicon.ico" access="permitAll" />
+
+        <!-- Default catch all for any unspecified patterns -->
+        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider >
+            <security:user-service>
+                <security:user name="user1" password="password1" authorities="ROLE_USER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>

@@ -2,10 +2,20 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/security
-                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- annotation-config is required to enable ConfigurationClassPostProcessor and other
+         annotations to handle @Configuration classes. -->
+    <context:annotation-config/>
+
+    <!-- allows beans in the following @Configuration class(es) to be available in this context -->
+    <bean class="com.orangemako.spring.config.DatabaseConfig" />
 
     <!-- use-expressions: allows the use of permitAll, isAuthenticated, etc.
          auto-config: sets form-login, http-basic, and logout as the default values -->
@@ -24,9 +34,36 @@
 
     <security:authentication-manager>
         <security:authentication-provider >
-            <security:user-service>
+            <!-- Uses credentials in a database to authenticate/authorize users -->
+            <security:jdbc-user-service data-source-ref="dataSource"
+                                        users-by-username-query="
+                                            SELECT
+                                                username,
+                                                password,
+                                                enabled
+                                            FROM
+                                                user
+                                            WHERE
+                                                username = ?"
+
+                                        authorities-by-username-query="
+                                            SELECT
+                                                u.username,
+                                                r.name
+                                            FROM
+                                                user u
+                                                JOIN user_role ur ON ur.user_id = u.id
+                                                JOIN role r ON ur.role_id = r.id
+                                            WHERE
+                                                u.username = ?"
+
+                                        role-prefix="ROLE_" />
+
+            <!-- Specifying a list of users and credentials -->
+            <!-- security:user-service>
                 <security:user name="username1" password="password1" authorities="ROLE_USER" />
-            </security:user-service>
+                <security:user name="username2" password="password2" authorities="ROLE_USER" />
+            </security:user-service -->
         </security:authentication-provider>
     </security:authentication-manager>
 

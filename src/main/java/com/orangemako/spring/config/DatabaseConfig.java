@@ -25,7 +25,7 @@ public class DatabaseConfig {
      *
      * @return
      */
-    @Bean
+    @Bean(name = "dataSource")
     EmbeddedDatabase embeddedDatabase() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase database = builder

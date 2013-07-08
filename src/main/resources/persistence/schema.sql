@@ -6,3 +6,25 @@ CREATE TABLE items (
   category VARCHAR(50),
   price DOUBLE
 )
+
+CREATE TABLE user (
+  id INTEGER NOT NULL IDENTITY,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  enabled BOOLEAN NOT NULL
+)
+
+CREATE TABLE role (
+  id INTEGER NOT NULL IDENTITY,
+  name VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE user_role (
+  id INTEGER NOT NULL IDENTITY,
+  user_id INTEGER NOT NULL,
+  role_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (role_id) REFERENCES role(id)
+)
+
+

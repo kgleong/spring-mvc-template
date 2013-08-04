@@ -1,6 +1,5 @@
 package com.orangemako.spring.config;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +15,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 @Configuration // Identifies this class to Spring as a configuration file
 @Import(DatabaseConfig.class)
-@MapperScan(basePackages = {"com.orangemako.spring.dao"}) // Scans the specified package(es) for MyBatis mapper interfaces.
 @ComponentScan(basePackages = {"com.orangemako.spring.service"}) // Scans the following packages for classes with @Component annotations
 public class ApplicationConfig {
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationConfig.class);

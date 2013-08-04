@@ -18,7 +18,6 @@ import java.util.List;
 public class ItemService {
     private static final Logger LOG = LoggerFactory.getLogger(ItemService.class);
 
-    @Resource
     ItemDao itemDao;
 
     /**

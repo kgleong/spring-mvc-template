@@ -1,14 +1,19 @@
 package com.orangemako.spring.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -19,6 +24,8 @@ import java.beans.PropertyVetoException;
  * @author Kevin Leong
  */
 @Configuration
+@EnableTransactionManagement(proxyTargetClass = true)
+@EnableJpaRepositories("com.orangemako.spring.repository")
 public class DatabaseConfig {
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseConfig.class);
 
@@ -74,17 +81,33 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    /**
-     * Pass the database connection to MyBatis
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    SqlSessionFactory sqlSessionFactory() throws Exception {
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(remoteDatabase());
+    @Bean(name = "entityManagerFactory")
+    LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws PropertyVetoException {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
-        return factoryBean.getObject();
+        entityManagerFactoryBean.setDataSource(remoteDatabase());
+        entityManagerFactoryBean.setPersistenceUnitName("spring-jpa");
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+
+        return entityManagerFactoryBean;
+    }
+
+    @Bean
+    HibernateJpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setShowSql(true);
+        jpaVendorAdapter.setGenerateDdl(true);
+        jpaVendorAdapter.setDatabase(Database.MYSQL);
+
+        return jpaVendorAdapter;
+    }
+
+    @Bean
+    JpaTransactionManager transactionManager() throws PropertyVetoException {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+
+        return transactionManager;
     }
 
     /**
@@ -92,7 +115,7 @@ public class DatabaseConfig {
      * @return
      */
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return ConfigUtils.propertySourcesPlaceholderConfigurer();
     }
 }

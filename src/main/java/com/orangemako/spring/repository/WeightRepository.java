@@ -1,14 +1,18 @@
 package com.orangemako.spring.repository;
 
 import com.orangemako.spring.domain.User;
+import com.orangemako.spring.domain.Weight;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
- * User Repository.
+ * Weight repository.
  *
  * @author Kevin Leong
  */
-public interface UserRepository extends CrudRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface WeightRepository extends CrudRepository<Weight, Long>, JpaSpecificationExecutor<Weight> {
 
+    List<Weight> findByUser(User user);
 }

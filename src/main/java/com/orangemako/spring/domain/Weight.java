@@ -36,6 +36,8 @@ public class Weight {
 
     Double value;
 
+    String notes;
+
     public Long getId() {
         return id;
     }
@@ -74,5 +76,13 @@ public class Weight {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

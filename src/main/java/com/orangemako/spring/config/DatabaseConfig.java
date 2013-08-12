@@ -24,7 +24,11 @@ import java.beans.PropertyVetoException;
  * @author Kevin Leong
  */
 @Configuration
+
 @EnableTransactionManagement(proxyTargetClass = true)
+
+// Specifies the location of repositories for bean creation and proxy creation that
+// handles incoming queries to the repositories.
 @EnableJpaRepositories("com.orangemako.spring.repository")
 public class DatabaseConfig {
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseConfig.class);
@@ -58,7 +62,7 @@ public class DatabaseConfig {
     @Value("${db.acquire.retry.delay}")
     int acquireRetryDelay;
 
-    /**
+    /**                                                                                                                d
      * Setup a pooled database connection with a remote database.
      *
      * @return

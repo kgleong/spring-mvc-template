@@ -12,6 +12,11 @@ A description of the branches in this repository:
     - Log4J/SLF4J
     - TestNG support using test suite XML configuration.
     - Inherits features from the *basic* branch
+*   **spring-data-remote-db**
+    - Spring Data
+    - Connects to a remote MySQL host/database
+    - c3p0 pooled database connections
+    - Uses a multiple user, weight tracking application as an example.
 *   **mybatis**
     - MyBatis ORM Framework
     - HSQLDB embedded in-memory database
